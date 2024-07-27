@@ -111,5 +111,37 @@ public class UserServiceTest {
         Assertions.assertEquals(Status.Code.FAILED_PRECONDITION, ex.getStatus().getCode());
     }
 
+    @Test
+    public void buySellTest(){
+        //buy
+        var buyRequest = StockTradeRequest.newBuilder()
+                .setUserId(2)
+                .setPrice(100)
+                .setQuantity(5)
+                .setTicker(Ticker.AMAZON)
+                .setAction(TradeAction.BUY)
+                .build();
+        var buyResponse = this.stub.tradeStock(buyRequest);
+
+        //validate BuyResponse
+        Assertions.assertEquals(9500, buyResponse.getBalance());
+
+        //checkholding
+        var userRequest = UserInformationRequest.newBuilder().setUserId(2).build();
+        var userResponse = this.stub.getUserInformation(userRequest);
+        Assertions.assertEquals(1, userResponse.getHoldingsCount());
+        Assertions.assertEquals(Ticker.AMAZON, userResponse.getHoldingsList().getFirst().getTicker());
+
+        //sell
+        var sellRequest = buyRequest
+                .toBuilder()
+                .setAction(TradeAction.SELL)
+                .setPrice(102).build();
+        var sellResponse = this.stub.tradeStock(sellRequest);
+
+        //validate balance
+        Assertions.assertEquals(10010, sellResponse.getBalance());
+    }
+
 
 }
