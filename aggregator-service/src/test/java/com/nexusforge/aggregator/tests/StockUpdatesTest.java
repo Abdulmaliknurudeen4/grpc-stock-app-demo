@@ -17,6 +17,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@DirtiesContext
 @SpringBootTest(properties = {
         "grpc.server.port=-1",
         "grpc.server.in-process-name=integration-test",
