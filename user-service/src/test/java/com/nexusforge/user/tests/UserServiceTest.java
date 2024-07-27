@@ -1,5 +1,8 @@
 package com.nexusforge.user.tests;
 
+import com.nexusforge.common.Ticker;
+import com.nexusforge.user.StockTradeRequest;
+import com.nexusforge.user.TradeAction;
 import com.nexusforge.user.UserInformationRequest;
 import com.nexusforge.user.UserServiceGrpc;
 import io.grpc.Status;
@@ -50,6 +53,62 @@ public class UserServiceTest {
 
         Assertions.assertEquals(Status.Code.NOT_FOUND, ex.getStatus().getCode());
 
+    }
+
+    @Test
+    public void unknownTickerBuyTest(){
+        var ex=  Assertions.assertThrows(StatusRuntimeException.class, ()->{
+            var request = StockTradeRequest.newBuilder()
+                    .setUserId(1)
+                    .setAction(TradeAction.BUY)
+                    .setTicker(Ticker.UNKNOWN)
+                    .setPrice(45)
+                    .setQuantity(2)
+                    .build();
+
+            var response = this.stub.tradeStock(request);
+
+        });
+
+        Assertions.assertEquals(Status.Code.INVALID_ARGUMENT, ex.getStatus().getCode());
+
+    }
+
+    @Test
+    public void insufficientSharesTest(){
+
+        var ex=  Assertions.assertThrows(StatusRuntimeException.class, ()->{
+            var request = StockTradeRequest.newBuilder()
+                    .setUserId(1)
+                    .setAction(TradeAction.SELL)
+                    .setTicker(Ticker.GOOGLE)
+                    .setPrice(45)
+                    .setQuantity(2)
+                    .build();
+
+            var response = this.stub.tradeStock(request);
+
+        });
+
+        Assertions.assertEquals(Status.Code.FAILED_PRECONDITION, ex.getStatus().getCode());
+    }
+
+    @Test
+    public void insufficientBalanceTest(){
+        var ex=  Assertions.assertThrows(StatusRuntimeException.class, ()->{
+            var request = StockTradeRequest.newBuilder()
+                    .setUserId(1)
+                    .setAction(TradeAction.BUY)
+                    .setTicker(Ticker.GOOGLE)
+                    .setPrice(10_000)
+                    .setQuantity(2)
+                    .build();
+
+            var response = this.stub.tradeStock(request);
+
+        });
+
+        Assertions.assertEquals(Status.Code.FAILED_PRECONDITION, ex.getStatus().getCode());
     }
 
 
