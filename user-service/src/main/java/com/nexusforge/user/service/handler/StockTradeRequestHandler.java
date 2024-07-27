@@ -11,7 +11,9 @@ import com.nexusforge.user.repository.PortfolioItemRepository;
 import com.nexusforge.user.repository.UserRepository;
 import com.nexusforge.user.util.EntityMessageMapper;
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StockTradeRequestHandler {
     private final UserRepository userRepository;
     private final PortfolioItemRepository portfolioItemRepository;
