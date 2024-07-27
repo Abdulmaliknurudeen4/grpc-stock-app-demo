@@ -3,6 +3,7 @@ package com.nexusforge.aggregator.tests.mockservice;
 import com.nexusforge.user.*;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
+// multiple versions of this can be written
 
 public class UserMockService extends UserServiceGrpc.UserServiceImplBase {
     @Override

@@ -18,7 +18,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "userId", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public UserInformation getUserInformation(@PathVariable Integer userId) {
         return this.userService.getUserInformation(userId);
     }
