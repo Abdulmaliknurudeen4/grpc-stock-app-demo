@@ -3,7 +3,7 @@ import com.nexusforge.common.Ticker;
 import jakarta.persistence.*;
 
 @Entity
-public class PorfolioItem {
+public class PortfolioItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
