@@ -28,6 +28,7 @@ public class UserService extends UserServiceGrpc.UserServiceImplBase {
         log.info("user information for id {}", request.getUserId());
         var userInformation = this.userInformationRequestHandler.getUserInformation(request);
         responseObserver.onNext(userInformation);
+        log.info("{}", userInformation);
         responseObserver.onCompleted();
     }
 

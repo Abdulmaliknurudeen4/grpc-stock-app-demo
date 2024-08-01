@@ -15,7 +15,6 @@ CREATE TABLE portfolio_item (
     quantity int,
     foreign key (customer_id) references customer(id)
 );
-
 insert into customer(name, balance)
     values
         ('Sam', 10000),

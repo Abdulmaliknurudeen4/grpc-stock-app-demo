@@ -28,7 +28,7 @@ public class PriceUpdateListener implements StreamObserver<PriceUpdate> {
     public SseEmitter createEmitter() {
         var emitter = new SseEmitter(sseTimeout);
         this.emitters.add(emitter);
-        //periodic cleaing of set
+        //periodic cleaning of set
         emitter.onTimeout(() -> emitters.remove(emitter));
         emitter.onError((ex) -> emitters.remove(emitter));
         emitter.onCompletion(() -> emitters.remove(emitter));
