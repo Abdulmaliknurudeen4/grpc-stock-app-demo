@@ -21,17 +21,17 @@ public class UserInsertRunner implements CommandLineRunner {
         var user1 = new User();
         user1.setId(1);
         user1.setName("Sam");
-        user1.setBalance(1000);
+        user1.setBalance(10000);
 
         var user2 = new User();
         user2.setId(2);
         user2.setName("Mike");
-        user2.setBalance(1000);
+        user2.setBalance(10000);
 
         var user3 = new User();
         user3.setId(3);
         user3.setName("John");
-        user3.setBalance(1000);
+        user3.setBalance(10000);
         userRepository.saveAll(List.of(user1,user2,user3));
     }
 }

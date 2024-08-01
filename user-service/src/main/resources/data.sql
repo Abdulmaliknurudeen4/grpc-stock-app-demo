@@ -1,3 +1,7 @@
+-- noinspection SqlDialectInspectionForFile
+
+-- noinspection SqlNoDataSourceInspectionForFile
+
 DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS portfolio_item;
 
